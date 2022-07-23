@@ -19,7 +19,7 @@ public class CNCityCrawler {
         int num = 0;
         //创建文件输出流
         FileWriter fileWriter = new FileWriter("xxx.sql");
-        //设置访问url(国际统计局的统计地址)
+        //1 设置访问url(国际统计局的统计地址)
         String baseUrl = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2021/";
         //使用jsoup获取页面内容
         Document doc = getPersonalDoc(baseUrl);
@@ -53,7 +53,7 @@ public class CNCityCrawler {
             fileWriter.flush();
             log.info(format);
             
-            //获取市级访问url
+            //2 获取市级访问url
             String cityUrl = baseUrl + href;
             doc = getPersonalDoc(cityUrl);
             //获取页面中<tr>标签且class = "citytr"
