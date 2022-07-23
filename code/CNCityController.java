@@ -1,4 +1,4 @@
-package top.rilirili.memos.controller;
+package com.github.memos.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import jakarta.annotation.Resource;
@@ -7,15 +7,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import top.rilirili.memos.config.VersionConfig;
-import top.rilirili.memos.dto.ResultVO;
-import top.rilirili.memos.dto.request.*;
-import top.rilirili.memos.dto.response.*
-import top.rilirili.memos.service.impl.*;
-import top.rilirili.memos.utils.DateUtils;
-import top.rilirili.memos.utils.MessagesUtils;
-import top.rilirili.memos.utils.StringHelper;
-import top.rilirili.memos.utils.SysPlatLog;
+import com.github.memos.config.VersionConfig;
+import com.github.memos.dto.ResultVO;
+import com.github.memos.dto.request.*;
+import com.github.memos.dto.response.*
+import com.github.memos.service.impl.*;
+import com.github.memos.utils.DateUtils;
+import com.github.memos.utils.MessagesUtils;
+import com.github.memos.utils.StringHelper;
+import com.github.memos.utils.SysPlatLog;
 
 import java.util.List;
 

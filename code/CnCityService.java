@@ -1,4 +1,4 @@
-package top.rilirili.memos.service.impl;
+package com.github.memos.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -7,10 +7,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import top.rilirili.memos.dao.*;
-import top.rilirili.memos.dto.response.*
-import top.rilirili.memos.pojo.CnArea;
-import top.rilirili.memos.utils.ListUtil;
+import com.github.memos.dao.*;
+import com.github.memos.dto.response.*
+import com.github.memos.pojo.CnArea;
+import com.github.memos.utils.ListUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +32,10 @@ public class CnAreaService extends ServiceImpl<CnAreaDao, CnArea> {
      * @param code:
      * @param mod:
      * @MethodName: getArea
-     * @Author: yaowei
+     * @Author:
      * @Date: 2020/7/8 3:48 下午
      * @Version: 1.0
-     * @return: top.rilirili.memos.dto.response.RespCnArea
+     * @return: com.github.memos.dto.response.RespCnArea
      **/
     public RespCnArea getArea(long code, int mod) {
         //查数据库
@@ -53,10 +53,10 @@ public class CnAreaService extends ServiceImpl<CnAreaDao, CnArea> {
      * @param code:
      * @param mod:
      * @MethodName: getAreaByCode
-     * @Author: yaowei
+     * @Author:
      * @Date: 2020/7/8 3:48 下午
      * @Version: 1.0
-     * @return: top.rilirili.memos.dto.response.RespCnArea
+     * @return: com.github.memos.dto.response.RespCnArea
      **/
     public RespCnAria getAreaByCode(long code, int mod) {
         //查数据库
