@@ -1,3 +1,5 @@
+package com.github.memos.utils;
+
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,14 +14,10 @@ import java.text.MessageFormat;
 public class CNCityCrawler {
 
     public static void main(String[] args) throws IOException {
-        getAreaTest();
-    }
-
-    public static void getAreaTest() throws IOException {
         int num = 0;
         //创建文件输出流
         FileWriter fileWriter = new FileWriter("xxx.sql");
-        //1 设置访问url(国际统计局的统计地址)
+        //1_设置访问url(国际统计局的统计地址)
         String baseUrl = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2021/";
         //使用jsoup获取页面内容
         Document doc = getPersonalDoc(baseUrl);
@@ -53,7 +51,7 @@ public class CNCityCrawler {
             fileWriter.flush();
             log.info(format);
             
-            //2 获取市级访问url
+            //2_获取市级访问url
             String cityUrl = baseUrl + href;
             doc = getPersonalDoc(cityUrl);
             //获取页面中<tr>标签且class = "citytr"
@@ -79,7 +77,7 @@ public class CNCityCrawler {
                 fileWriter.flush();
                 log.info(format);
 
-                //获取县级访问url
+                //3_获取县级访问url
                 String countryUrl = baseUrl + href;
                 doc = getPersonalDoc(countryUrl);
                 Elements countryTds = doc.select("tr[class=countytr]");
@@ -102,7 +100,7 @@ public class CNCityCrawler {
                     log.info(format);
 
 
-                    //获取乡级访问url
+                    //4_获取乡级访问url
                     String townUrl = baseUrl + "/" + provinceCode + "/" + href;
                     doc = getPersonalDoc(townUrl);
                     Elements townTds = doc.select("tr[class=towntr]");
@@ -124,7 +122,7 @@ public class CNCityCrawler {
                         fileWriter.flush();
                         log.info(format);
 
-                        //获取村级访问url
+                        //5_获取村级访问url
                         String streetUrl = baseUrl + "/" + townCode.substring(0, 2) + "/" + townCode.substring(2, 4) + "/" + href;
                         doc = getPersonalDoc(streetUrl);
                         Elements streetTds = doc.select("tr[class=villagetr]");
@@ -142,8 +140,8 @@ public class CNCityCrawler {
                             log.info(format);
                         }
                         num += streetTds.size();
-                        System.out.println("辖区下居委会数" + streetTds.size());
-                        System.out.println("累加" + num);
+                        log.info("辖区下居委会数" + streetTds.size());
+                        log.info("累加" + num);
                         
                         try {
                             Thread.sleep(50);
@@ -172,11 +170,10 @@ public class CNCityCrawler {
 
     public static Document getPersonalDoc(String url) {
         Document doc = null;
-        boolean flag = true;
-        while (flag) {
+        while (true) {
             try {
                 doc = Jsoup.connect(url).timeout(1000).get();
-                flag = false;
+                break;
             } catch (IOException e) {
                 log.error(e.getMessage());
             }
