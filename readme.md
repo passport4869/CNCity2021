@@ -1,8 +1,8 @@
 ## CN行政区划2021
 
 - url:      http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2021/
-- language: JAVA
-- lib:      Jsoup
+- language: JAVA8 [https://www.oracle.com/java/technologies/downloads/#java8]
+- lib:      Jsoup [https://mvnrepository.com/artifact/org.jsoup/jsoup/1.15.2]
 
 2021年全国统计用区划代码（12位）、城乡分类代码（3位）
 
@@ -16,13 +16,13 @@
 - 1 国家
   - 2 省、直辖市、自治区
     - 3 市、直辖县、自治州、地区
-      - 4 县、县级市、
+      - 4 县、县级市、地区
         - 5 镇、街道、乡、村
           - 6 社区、居委会、村委会
 
 ## 调用api
 
-- 查询行政区划树，限制钻取2层
+- 查询行政区划树，限制向下钻取2层
   - API: https://rilirili.top/t/area
   - Method: GET
   - Parameter:
