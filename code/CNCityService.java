@@ -25,8 +25,16 @@ import java.util.List;
 @Service
 public class CnAreaService extends ServiceImpl<CnAreaDao, CnArea> {
 
-    @Autowired
+    private static Map<Long, Integer> map;
     private CnAreaDao areaDao;
+
+    @Autowired
+    public CnAreaService(CnAreaDao areaDao) {
+        this.areaDao = areaDao;
+        if (map == null) {
+            map = Maps.newHashMap();
+        }
+    }
 
     /**
      * @param code:
@@ -82,6 +90,19 @@ public class CnAreaService extends ServiceImpl<CnAreaDao, CnArea> {
             });
 
             one.setChildren(two);
+
+            //查根结点
+            if (one.getId() == 100000L) {
+                if (map.get(100000L) == null) {
+                    var num = Long.valueOf(0);
+                    wrapper = new QueryWrapper<>();
+                    wrapper.ne("id", 100000L);
+                    num = areaDao.selectCount(wrapper);
+                    map.put(100000L, num.intValue());
+                }
+                one.setNum(map.get(100000L));
+            }
+
             if (j++ < mod) {
                 for (RespCnArea three : two) {
                     this.fillChildren(three, mod, j);
@@ -108,6 +129,20 @@ public class CnAreaService extends ServiceImpl<CnAreaDao, CnArea> {
     private RespCnArea getRespArea(CnArea one) {
         RespCnArea area = new RespCnArea();
         BeanUtils.copyProperties(one, area);
+
+        //不查叶子结点
+        if (!"6".equals(area.getLevel()) && area.getId() != 100000L) {
+            if (map.get(area.getId()) == null) {
+                //查非根、叶子结点
+                var num = Long.valueOf(0);
+                QueryWrapper<CnArea> wrapper = new QueryWrapper<>();
+                wrapper.likeRight("remark", area.getRemark() + "，");
+                num = areaDao.selectCount(wrapper);
+                map.put(area.getId(), num.intValue());
+                area.setNum(num.intValue());
+            }
+            area.setNum(map.get(area.getId()));
+        }
 
         return area;
     }
